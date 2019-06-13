@@ -46,3 +46,10 @@ local.properties
 .classpath
 .settings/
 .loadpath
+
+# others
+mvnw
+*.cmd
+HELP.md
+**/.mvn/**
+
