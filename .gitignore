@@ -52,4 +52,5 @@ mvnw
 *.cmd
 HELP.md
 **/.mvn/**
+**/.gitignore
 
