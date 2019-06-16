@@ -1,0 +1,15 @@
+spring:
+  data:
+    mongodb:
+      first:
+        uri: mongodb://admin:admin@localhost:27017/?authSource=admin&authMechanism=SCRAM-SHA-1
+        host: 127.0.0.1
+        port: 27017
+        username: admin
+        password: admin
+        database: demo
+
+
+      second:
+        uri: mongodb://admin:admin@localhost:27017/?authSource=admin&authMechanism=SCRAM-SHA-1
+        database: another_demo
