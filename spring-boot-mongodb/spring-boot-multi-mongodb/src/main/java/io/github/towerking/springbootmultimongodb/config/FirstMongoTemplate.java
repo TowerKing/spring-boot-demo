@@ -14,7 +14,7 @@ import org.springframework.data.mongodb.repository.config.EnableMongoRepositorie
 
 @Configuration
 @EnableMongoRepositories(basePackages = "io.github.towerking.springbootmultimongodb.repository.first", mongoTemplateRef = "firstMongo")
-public class FirstMongoTemplate {
+public class FirstMongoTemplate extends AbstractMongoTemplate {
 
     @Autowired
     @Qualifier("firstMongoProperties")
@@ -29,20 +29,7 @@ public class FirstMongoTemplate {
     @Bean
     @Primary
     public MongoDbFactory firstFactory(MongoProperties mongoProperties) {
-        ServerAddress serverAddress = new ServerAddress(mongoProperties.getHost(), mongoProperties.getPort());
-
-        MongoCredential credential = MongoCredential.createCredential(mongoProperties.getUsername(),
-                mongoProperties.getDatabase(), mongoProperties.getPassword());
-
-        MongoClientOptions options = MongoClientOptions.builder()
-                .serverSelectionTimeout(1000)
-                .build();
-
-        MongoClient mongoClient = new MongoClient(serverAddress, credential, options);
-        return new SimpleMongoDbFactory(mongoClient, mongoProperties.getDatabase());
-
-//        ServerAddress serverAddress = new ServerAddress(mongoProperties.getUri());
-//        return new SimpleMongoDbFactory(new MongoClient(serverAddress), mongoProperties.getDatabase());
+        return createFactory(mongoProperties);
     }
 
 }

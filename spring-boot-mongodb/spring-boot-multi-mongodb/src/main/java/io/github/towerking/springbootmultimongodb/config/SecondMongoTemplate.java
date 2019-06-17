@@ -15,7 +15,7 @@ import org.springframework.data.mongodb.repository.config.EnableMongoRepositorie
 
 @Configuration
 @EnableMongoRepositories(basePackages = "io.github.towerking.springbootmultimongodb.repository.second", mongoTemplateRef = "secondMongo")
-public class SecondMongoTemplate {
+public class SecondMongoTemplate extends AbstractMongoTemplate {
 
     @Autowired
     @Qualifier("secondMongoProperties")
@@ -28,8 +28,7 @@ public class SecondMongoTemplate {
 
     @Bean
     public MongoDbFactory secondFactory(MongoProperties mongoProperties) {
-        ServerAddress serverAddress = new ServerAddress(mongoProperties.getUri());
-        return new SimpleMongoDbFactory(new MongoClient(serverAddress), mongoProperties.getDatabase());
+        return createFactory(mongoProperties);
     }
 
 }
