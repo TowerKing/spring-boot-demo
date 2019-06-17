@@ -8,6 +8,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.CommandLineRunner;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
+import org.springframework.data.mongodb.repository.MongoRepository;
 
 @SpringBootApplication
 @Slf4j
@@ -25,6 +26,11 @@ public class SpringBootMultiMongodbApplication implements CommandLineRunner {
 
     @Override
     public void run(String... args) throws Exception {
+        crudByFirstRepository();
+        crudBySecondRepository();
+    }
+
+    private void crudByFirstRepository() {
         User user = User.builder()
                 .id(1)
                 .name("tower king")
@@ -40,6 +46,23 @@ public class SpringBootMultiMongodbApplication implements CommandLineRunner {
 
         firstRepository.delete(user);
         log.info("-- Saved User {} --", firstRepository.findUserById(1));
+    }
 
+    private void crudBySecondRepository() {
+        User user = User.builder()
+                .id(2)
+                .name("tower king")
+                .gender("male")
+                .age(18).build();
+
+        secondRepository.insert(user);
+        log.info("-- second Saved User {} --", secondRepository.findUserById(2));
+
+        user.setAge(20);
+        secondRepository.save(user);
+        log.info("-- second Updated User {} --", secondRepository.findUserById(2));
+
+        secondRepository.delete(user);
+        log.info("-- second Saved User {} --", secondRepository.findUserById(2));
     }
 }
