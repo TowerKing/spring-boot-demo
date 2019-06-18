@@ -28,13 +28,6 @@ public class SpringBootRedisApplication implements ApplicationRunner {
         SpringApplication.run(SpringBootRedisApplication.class, args);
     }
 
-    @Bean
-    public RedisTemplate<String, User> redisTemplate(RedisConnectionFactory redisConnectionFactory) {
-        RedisTemplate<String, User> template = new RedisTemplate<>();
-        template.setConnectionFactory(redisConnectionFactory);
-        return template;
-    }
-
     @Override
     public void run(ApplicationArguments args) throws Exception {
 
@@ -43,6 +36,7 @@ public class SpringBootRedisApplication implements ApplicationRunner {
         HashOperations<String, String, User> hashOperations = redisTemplate.opsForHash();
         if (redisTemplate.hasKey(CACHE) && hashOperations.hasKey(CACHE, userName)) {
             log.info("Get User {} from redis", userName);
+            log.info("User {}", hashOperations.get(CACHE, userName));
         }
 
         User user = User.builder()
@@ -53,7 +47,7 @@ public class SpringBootRedisApplication implements ApplicationRunner {
                 .build();
 
         hashOperations.put(CACHE, userName, user);
-        redisTemplate.expire(CACHE, 1, TimeUnit.MINUTES);
+        redisTemplate.expire(CACHE, 5, TimeUnit.MINUTES);
 
     }
 }
