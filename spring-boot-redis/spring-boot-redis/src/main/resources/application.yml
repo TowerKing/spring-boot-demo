@@ -1,1 +1,12 @@
 
+spring:
+  redis:
+    host: localhost
+    lettuce:
+      pool:
+        max-active: 5
+        max-idle: 5
+
+  application:
+    name: spring-boot-redis
+
