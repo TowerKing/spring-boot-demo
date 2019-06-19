@@ -30,7 +30,7 @@ public class SpringBootJedisApplication implements ApplicationRunner {
 
         try (Jedis jedis = jedisPool.getResource()) {
             jedis.set("test", "test");
-            jedis.expire("test", 30000);
+            jedis.expire("test", 3);
             log.info("test value {}", jedis.get("test"));
         }
     }
