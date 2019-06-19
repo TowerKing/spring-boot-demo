@@ -1,0 +1,5 @@
+redis:
+  host: localhost
+  max-total: 8
+  max-idle : 8
+  test-on-borrow: true
