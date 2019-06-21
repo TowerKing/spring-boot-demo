@@ -7,3 +7,5 @@ spring:
     port: 5672
     username: guest
     password: guest
+
+queue.user.name: spring-boot-queue-user
