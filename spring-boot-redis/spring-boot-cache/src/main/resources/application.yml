@@ -1,0 +1,14 @@
+spring:
+  application:
+    name: spring-boot-cache
+
+
+  cache:
+    type: redis
+    cache-names: user
+    redis:
+      time-to-live: 5000ms
+      cache-null-values: false
+
+  redis:
+    host: localhost
