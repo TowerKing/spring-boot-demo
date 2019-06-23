@@ -6,6 +6,7 @@ import org.springframework.boot.ApplicationArguments;
 import org.springframework.boot.ApplicationRunner;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
+import org.springframework.jdbc.core.JdbcTemplate;
 
 import javax.sql.DataSource;
 import java.sql.Connection;
@@ -18,6 +19,9 @@ public class SpringBootJdbcApplication implements ApplicationRunner {
     @Autowired
     private DataSource dataSource;
 
+    @Autowired
+    private JdbcTemplate jdbcTemplate;
+
     public static void main(String[] args) {
         SpringApplication.run(SpringBootJdbcApplication.class, args);
     }
@@ -25,6 +29,7 @@ public class SpringBootJdbcApplication implements ApplicationRunner {
     @Override
     public void run(ApplicationArguments args) throws Exception {
         showConnection();
+        showData();
     }
 
     private void showConnection() throws SQLException {
@@ -32,5 +37,10 @@ public class SpringBootJdbcApplication implements ApplicationRunner {
         Connection connection = dataSource.getConnection();
         log.info(connection.toString());
         connection.close();
+    }
+
+    private void showData() {
+        jdbcTemplate.queryForList("select * from user")
+                .forEach(row -> log.info(row.toString()));
     }
 }
