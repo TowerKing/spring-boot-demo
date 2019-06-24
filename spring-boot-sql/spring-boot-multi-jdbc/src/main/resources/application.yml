@@ -1,0 +1,12 @@
+subject:
+  datasource:
+    url: jdbc:h2:mem:subject
+    username: sa
+    password:
+
+
+student:
+  datasource:
+    url: jdbc:h2:mem:student
+    username: sa
+    password:
