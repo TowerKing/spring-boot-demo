@@ -13,25 +13,25 @@ import javax.sql.DataSource;
 
 @Slf4j
 @Configuration
-public class SubjectDataSourceConfig {
+public class StudentDataSourceConfig {
 
-    @ConfigurationProperties(prefix = "spring.datasource.subject")
+    @ConfigurationProperties(prefix = "spring.datasource.student")
     @Bean
-    public DataSourceProperties subjectDataSourceProperties() {
+    public DataSourceProperties studentDataSourceProperties() {
         return new DataSourceProperties();
     }
 
     @Bean
-    public DataSource subjectDataSource() {
-        DataSourceProperties dataSourceProperties = subjectDataSourceProperties();
-        log.info("subject datasource {}", dataSourceProperties.getUrl());
+    public DataSource studentDataSource() {
+        DataSourceProperties dataSourceProperties = studentDataSourceProperties();
+        log.info("student datasource {}", dataSourceProperties.getUrl());
         return dataSourceProperties.initializeDataSourceBuilder().build();
     }
 
     @Bean
     @Resource
-    public PlatformTransactionManager subjectTxManager(DataSource subjectDataSource) {
-        return new DataSourceTransactionManager(subjectDataSource);
+    public PlatformTransactionManager studentTxManager(DataSource studentDataSource) {
+        return new DataSourceTransactionManager(studentDataSource);
     }
 
 }
