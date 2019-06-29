@@ -13,7 +13,7 @@ import java.util.Date;
 @Builder
 public class User {
 
-    private Long id;
+    private Integer id;
     private String name;
     private Date createTime;
     private Date updateTime;
