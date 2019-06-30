@@ -1,0 +1,43 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE generatorConfiguration
+        PUBLIC "-//mybatis.org//DTD MyBatis Generator Configuration 1.0//EN"
+        "http://mybatis.org/dtd/mybatis-generator-config_1_0.dtd">
+
+<generatorConfiguration>
+    <context id="H2Tables" targetRuntime="MyBatis3">
+        <plugin type="org.mybatis.generator.plugins.FluentBuilderMethodsPlugin" />
+        <plugin type="org.mybatis.generator.plugins.ToStringPlugin" />
+        <plugin type="org.mybatis.generator.plugins.SerializablePlugin" />
+        <plugin type="org.mybatis.generator.plugins.RowBoundsPlugin" />
+
+        <jdbcConnection driverClass="org.h2.Driver"
+                        connectionURL="jdbc:h2:mem:testdb"
+                        userId="sa"
+                        password="">
+        </jdbcConnection>
+
+        <javaModelGenerator targetPackage="io.github.towerking.springbootmybatis.model"
+                            targetProject="./src/main/java">
+            <property name="enableSubPackages" value="true" />
+            <property name="trimStrings" value="true" />
+        </javaModelGenerator>
+
+        <sqlMapGenerator targetPackage="io.github.towerking.springbootmybatis.mapper"
+                         targetProject="./src/main/resources/mapper">
+            <property name="enableSubPackages" value="true" />
+        </sqlMapGenerator>
+
+        <!-- type 的值 ANNOTATEDMAPPER, XMLMAPPER, MIXEDMAPPER -->
+        <javaClientGenerator type="MIXEDMAPPER"
+                             targetPackage="io.github.towerking.springbootmybatis.mapper"
+                             targetProject="./src/main/java">
+            <property name="enableSubPackages" value="true" />
+        </javaClientGenerator>
+
+        <table tableName="t_student" domainObjectName="Student" >
+            <generatedKey column="id" sqlStatement="CALL IDENTITY()" identity="true" />
+            <columnOverride column="student_no" javaType="java.lang.String" jdbcType="VARCHAR" />
+            <columnOverride column="student_name" javaType="java.lang.String" jdbcType="VARCHAR" />
+        </table>
+    </context>
+</generatorConfiguration>
