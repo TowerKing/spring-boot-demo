@@ -12,3 +12,11 @@ create table t_student (
   student_name varchar(30) not null,
   primary key (id)
 );
+
+create table t_plugin (
+  id int(11) not null auto_increment,
+  remark varchar(100) not null,
+  create_time datetime not null,
+  update_time datetime not null,
+  primary key (id)
+);
