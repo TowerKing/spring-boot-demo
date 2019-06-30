@@ -2,13 +2,12 @@ package io.github.towerking.springbootmybatis.mapper;
 
 import io.github.towerking.springbootmybatis.model.Student;
 import io.github.towerking.springbootmybatis.model.StudentExample;
-import java.util.List;
-
 import org.apache.ibatis.annotations.*;
 import org.apache.ibatis.session.RowBounds;
 import org.springframework.stereotype.Component;
 
-@Mapper
+import java.util.List;
+
 @Component
 public interface StudentMapper {
     /**
