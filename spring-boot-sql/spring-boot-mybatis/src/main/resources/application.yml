@@ -5,3 +5,9 @@ mybatis:
 spring:
   application:
     name: spring-boot-mybatis-demo
+
+pagehelper:
+  offset-as-page-num: true
+  reasonable: true
+  page-size-zero: true
+  support-methods-arguments: true

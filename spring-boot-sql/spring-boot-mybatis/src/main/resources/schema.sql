@@ -13,9 +13,9 @@ create table t_student (
   primary key (id)
 );
 
-create table t_plugin (
+create table t_page_rows (
   id int(11) not null auto_increment,
-  remark varchar(100) not null,
+  title varchar(10) not null,
   create_time datetime not null,
   update_time datetime not null,
   primary key (id)

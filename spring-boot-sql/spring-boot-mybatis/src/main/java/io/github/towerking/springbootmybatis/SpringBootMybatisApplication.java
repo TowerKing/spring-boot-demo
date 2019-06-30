@@ -1,11 +1,14 @@
 package io.github.towerking.springbootmybatis;
 
+import com.github.pagehelper.PageInfo;
+import io.github.towerking.springbootmybatis.mapper.PageRowsMapper;
 import io.github.towerking.springbootmybatis.mapper.StudentMapper;
 import io.github.towerking.springbootmybatis.mapper.UserMapper;
 import io.github.towerking.springbootmybatis.model.Student;
 import io.github.towerking.springbootmybatis.model.StudentExample;
 import io.github.towerking.springbootmybatis.model.User;
 import lombok.extern.slf4j.Slf4j;
+import org.apache.ibatis.session.RowBounds;
 import org.mybatis.generator.api.MyBatisGenerator;
 import org.mybatis.generator.config.Configuration;
 import org.mybatis.generator.config.xml.ConfigurationParser;
@@ -31,6 +34,9 @@ public class SpringBootMybatisApplication implements ApplicationRunner {
     @Autowired
     private StudentMapper studentMapper;
 
+    @Autowired
+    private PageRowsMapper pageRowsMapper;
+
     public static void main(String[] args) {
         SpringApplication.run(SpringBootMybatisApplication.class, args);
     }
@@ -39,7 +45,8 @@ public class SpringBootMybatisApplication implements ApplicationRunner {
     public void run(ApplicationArguments args) throws Exception {
         // userCrud();
         // generateArtifacts();
-        studentCrud();
+        // studentCrud();
+        page();
     }
 
     private void userCrud() {
@@ -84,5 +91,17 @@ public class SpringBootMybatisApplication implements ApplicationRunner {
             log.info("select by example world: {}", s);
         });
 
+    }
+
+    private void page() {
+        pageRowsMapper.findAllWithRowBounds(new RowBounds(0, 2)).forEach(row -> log.info("page: {}", row));
+
+        log.info("------------------------------------------------");
+
+        pageRowsMapper.findAllWithParams(1, 4).forEach(row -> log.info("row: {}", row));
+
+        @SuppressWarnings("unchecked")
+        PageInfo pageInfo = new PageInfo(pageRowsMapper.findAllWithParams(2,4));
+        log.info("pageInfo {}", pageInfo);
     }
 }
