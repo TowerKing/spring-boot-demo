@@ -1,5 +1,6 @@
 package io.github.towerking.springbootmybatis;
 
+import com.github.pagehelper.PageHelper;
 import com.github.pagehelper.PageInfo;
 import io.github.towerking.springbootmybatis.mapper.PageRowsMapper;
 import io.github.towerking.springbootmybatis.mapper.StudentMapper;
@@ -94,14 +95,28 @@ public class SpringBootMybatisApplication implements ApplicationRunner {
     }
 
     private void page() {
+        // user RowBounds 物理分页
         pageRowsMapper.findAllWithRowBounds(new RowBounds(0, 2)).forEach(row -> log.info("page: {}", row));
 
         log.info("------------------------------------------------");
 
+        // use params
         pageRowsMapper.findAllWithParams(1, 4).forEach(row -> log.info("row: {}", row));
-
         @SuppressWarnings("unchecked")
         PageInfo pageInfo = new PageInfo(pageRowsMapper.findAllWithParams(2,4));
         log.info("pageInfo {}", pageInfo);
+
+        // use PageHelper with startPage
+        log.info("use PageHelper with startPage");
+        PageHelper.startPage(1, 4);
+        pageRowsMapper.findAll().forEach(row -> log.info("row {}", row));
+
+        // use PageHelper with offsetPage
+        log.info("use PageHelper with offsetPage");
+        PageHelper.offsetPage(1, 4);
+        pageRowsMapper.findAll().forEach(row -> log.info("row {}", row));
+
+        // more use methods, see link:
+        // https://github.com/pagehelper/Mybatis-PageHelper/blob/master/wikis/zh/HowToUse.md
     }
 }

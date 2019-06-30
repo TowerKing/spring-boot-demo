@@ -19,4 +19,7 @@ public interface PageRowsMapper {
     @Select("select * from t_page_rows order by id")
     List<PageRows> findAllWithParams(@Param("pageNum") int pageNum, @Param("pageSize") int pageSize);
 
+    @Select("select * from t_page_rows order by id")
+    List<PageRows> findAll();
+
 }
