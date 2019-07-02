@@ -1,7 +1,7 @@
-insert into t_user (name, create_time, update_time) values ('hello 01', now(), now());
-insert into t_user (name, create_time, update_time) values ('hello 02', now(), now());
-insert into t_user (name, create_time, update_time) values ('hello 03', now(), now());
-insert into t_user (name, create_time, update_time) values ('hello 04', now(), now());
-insert into t_user (name, create_time, update_time) values ('hello 05', now(), now());
-insert into t_user (name, create_time, update_time) values ('hello 06', now(), now());
-insert into t_user (name, create_time, update_time) values ('hello 07', now(), now());
+insert into t_user (name, create_time, update_time) values ('hello01', now(), now());
+insert into t_user (name, create_time, update_time) values ('hello02', now(), now());
+insert into t_user (name, create_time, update_time) values ('hello03', now(), now());
+insert into t_user (name, create_time, update_time) values ('hello04', now(), now());
+insert into t_user (name, create_time, update_time) values ('hello05', now(), now());
+insert into t_user (name, create_time, update_time) values ('hello06', now(), now());
+insert into t_user (name, create_time, update_time) values ('hello07', now(), now());
