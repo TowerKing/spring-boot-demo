@@ -1,4 +1,4 @@
-package io.github.towerking.srpingbootr2dbcreactor.model;
+package io.github.towerking.springbootr2dbcreactor.model;
 
 import lombok.AllArgsConstructor;
 import lombok.Builder;
