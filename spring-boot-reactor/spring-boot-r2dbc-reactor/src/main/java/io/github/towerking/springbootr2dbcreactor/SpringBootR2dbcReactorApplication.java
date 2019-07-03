@@ -1,6 +1,7 @@
 package io.github.towerking.springbootr2dbcreactor;
 
 import io.github.towerking.springbootr2dbcreactor.model.User;
+import io.github.towerking.springbootr2dbcreactor.repository.UserRepository;
 import io.r2dbc.h2.H2ConnectionConfiguration;
 import io.r2dbc.h2.H2ConnectionFactory;
 import io.r2dbc.spi.ConnectionFactory;
@@ -15,13 +16,19 @@ import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Sort;
 import org.springframework.data.r2dbc.config.AbstractR2dbcConfiguration;
 import org.springframework.data.r2dbc.function.DatabaseClient;
+import org.springframework.data.r2dbc.repository.config.EnableR2dbcRepositories;
+import reactor.core.publisher.Flux;
 import reactor.core.scheduler.Schedulers;
 
 import java.util.concurrent.CountDownLatch;
 
 @SpringBootApplication
 @Slf4j
+@EnableR2dbcRepositories
 public class SpringBootR2dbcReactorApplication extends AbstractR2dbcConfiguration implements ApplicationRunner {
+
+    @Autowired
+    private UserRepository repository;
 
     @Autowired
     private DatabaseClient client;
@@ -33,7 +40,23 @@ public class SpringBootR2dbcReactorApplication extends AbstractR2dbcConfiguratio
     @Override
     public void run(ApplicationArguments args) throws Exception {
         CountDownLatch countDownLatch = new CountDownLatch(2);
+        // demoByClient(countDownLatch);
+        demoByRepository(countDownLatch);
+        countDownLatch.await();
+    }
 
+    private void demoByRepository(CountDownLatch countDownLatch) {
+        repository.findAllById(Flux.just(1, 2))
+                .map(u -> u.getName() + "- age: " + u.getAge().toString())
+                .doFinally(s -> countDownLatch.countDown())
+                .subscribe(u -> log.info("Find {}", u));
+
+        repository.findByName("hello1")
+                .doFinally(s -> countDownLatch.countDown())
+                .subscribe(u -> log.info("Find {}", u));
+    }
+
+    private void demoByClient(CountDownLatch countDownLatch) {
         client.execute()
                 .sql("select * from t_user")
                 .as(User.class)
@@ -55,7 +78,6 @@ public class SpringBootR2dbcReactorApplication extends AbstractR2dbcConfiguratio
                 .subscribe(u -> log.info("Fetch select {}", u));
 
         log.info("after starting... ...");
-        countDownLatch.await();
     }
 
     @Bean
