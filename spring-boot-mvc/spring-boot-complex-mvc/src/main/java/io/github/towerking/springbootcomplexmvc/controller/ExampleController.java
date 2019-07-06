@@ -18,6 +18,7 @@ public class ExampleController {
     @ResponseBody
     @ResponseStatus(HttpStatus.CREATED)
     public Example addExampleWithOUtBindingResult(@Valid Example example) {
+        System.out.println(example.getCreateTime());
         return example;
     }
 }
