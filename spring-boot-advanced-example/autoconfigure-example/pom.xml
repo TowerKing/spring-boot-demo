@@ -29,6 +29,22 @@
             <artifactId>lombok</artifactId>
             <optional>true</optional>
         </dependency>
+
+
+        <!-- auto configure begin -->
+        <dependency>
+            <groupId>io.github.towerking</groupId>
+            <artifactId>spring-boot-helloworld</artifactId>
+            <version>0.0.1-SNAPSHOT</version>
+        </dependency>
+
+        <dependency>
+            <groupId>io.github.towerking</groupId>
+            <artifactId>hello-world-spring-boot-autoconfigure</artifactId>
+            <version>0.0.1-SNAPSHOT</version>
+        </dependency>
+        <!-- auto configure end -->
+
         <dependency>
             <groupId>org.springframework.boot</groupId>
             <artifactId>spring-boot-starter-test</artifactId>
