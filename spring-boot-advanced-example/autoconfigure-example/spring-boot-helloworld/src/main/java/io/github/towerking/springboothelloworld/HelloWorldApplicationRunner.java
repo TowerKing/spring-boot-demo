@@ -5,10 +5,10 @@ import org.springframework.boot.ApplicationArguments;
 import org.springframework.boot.ApplicationRunner;
 
 @Slf4j
-public class SpringBootHelloworldApplication implements ApplicationRunner {
+public class HelloWorldApplicationRunner implements ApplicationRunner {
 
-    public SpringBootHelloworldApplication() {
-        log.info("Initializing SpringBootHelloworldApplication");
+    public HelloWorldApplicationRunner() {
+        log.info("Initializing HelloWorldApplicationRunner");
     }
 
     public void run(ApplicationArguments args) throws Exception {
