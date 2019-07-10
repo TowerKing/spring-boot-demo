@@ -7,6 +7,7 @@ import org.springframework.stereotype.Component;
 @Component
 public class CustomIndicator implements HealthIndicator {
 
+    // view link: http://localhost:8080/actuator/health to see result
     @Override
     public Health health() {
         Health health;
@@ -15,5 +16,7 @@ public class CustomIndicator implements HealthIndicator {
                 .withDetail("message", "just let it down")
                 .build();
         return health;
+
+
     }
 }
